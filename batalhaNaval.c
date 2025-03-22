@@ -35,6 +35,35 @@ int checarNavioTabuleiro(int navio[3], char tabuleiro[TAMANHO_TABULEIRO][TAMANHO
             }
         }
     }
+    else if (navio[2] == 3){
+        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+            if (tabuleiro[navio[0]+i][navio[1]+i] == 'N') {
+                return 1;
+            }
+        }
+    }
+    else if (navio[2] == 4){
+        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+            if (tabuleiro[navio[0]-i][navio[1]+i] == 'N') {
+                return 1;
+            }
+        }
+    }
+    else if (navio[2] == 5){
+        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+            if (tabuleiro[navio[0]+i][navio[1]-i] == 'N') {
+                return 1;
+            }
+        }
+    }
+    else if (navio[2] == 6){
+        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+            if (tabuleiro[navio[0]-i][navio[1]-i] == 'N') {
+                return 1;
+            }
+        }
+    }
+
     return 0;
 }
 
@@ -46,24 +75,46 @@ void posicionarNavio(char tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO]) {
         //Colhendo as informações do navio
         printf("Posicionando navio : Insira a coordenada inicial do navio %d : \n", x );      
         scanf("%d %d", &navio[0], &navio[1]);
-        printf("digite 1 para vertical e 2 para horizontal\n");
+        printf("digite 1 para vertical , 2 para horizontal, 3 para diagonal para cima direita , 4 para diagonal para cima esquerda\n");
+        printf("digite 5 para diagonal para baixo direita , 6 para diagonal para baixo esquerda\n");
         scanf("%d", &navio[2]);
         //posicionando navio no tabuleiro de acordo com sua orientação
         if(checarNavioTabuleiro(navio,tabuleiro) == 1){
             printf("Posição inválida, tente novamente\n");
             x--;
         }
-        else 
-            if (navio[2] == 1){
+        switch(navio[2]){ 
+            case 1 :{
                 for (int i = 0; i < TAMANHO_NAVIO; i++) {
                     tabuleiro[navio[0]+i][navio[1]] = 'N';  
                     }
 
             }
-            else if (navio[2] == 2){
+            case 2 :{
                 for (int i = 0; i < TAMANHO_NAVIO; i++) {
                     tabuleiro[navio[0]][navio[1]+i] = 'N';  
                     }
+            }
+            case 3 :{
+                for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                    tabuleiro[navio[0]+i][navio[1]+i] = 'N';  
+                }
+            }
+            case 4 :{
+                for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                    tabuleiro[navio[0]-i][navio[1]+i] = 'N';  
+                    }
+        }
+            case 5 :{
+                for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                    tabuleiro[navio[0]+i][navio[1]-i] = 'N';  
+                }
+            }
+            case 6 :{
+                for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                    tabuleiro[navio[0]-i][navio[1]-i] = 'N';  
+                    }
+            }
         }
     }
 }
